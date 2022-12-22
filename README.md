@@ -1,1 +1,1 @@
-# kmfriederichs.github.io HOLLA!
+# kmfriederichs.github.io
