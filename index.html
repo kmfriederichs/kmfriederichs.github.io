@@ -80,12 +80,40 @@
       </div>
       
       <!-- subscribe form -->
-      <div class="col-sm-12 col-md-7 subscribe-form"> 
-               
+      <div class="col-sm-12 col-md-7 subscribe-form">  
         <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform">
-          <input type="text" name="email" placeholder="Enter your email address to get notified" id="subemail" />
+          <input type="email" name="email" placeholder="Enter your email address to get notified" id="subemail" required />
           <input type="submit" name="send" value="Notify me" id="subsubmit" class="btn2" />
         </form>
+      </div>
+
+      <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $to = 'katja.milena.friederichs@gmail.com'; // Replace with the desired recipient email address
+    $subject = 'New subscription';
+    $email = $_POST['email'];
+
+    // Validate email address
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo 'Invalid email address';
+        exit;
+    }
+
+    // Compose the email message
+    $message = "A new user subscribed with the following email address:\n\n";
+    $message .= "Email: $email\n";
+
+    // Send the email
+    $headers = 'From: katja.milena.friederichs@gmail.com'; // Replace with your own email address or leave it as is
+    if (mail($to, $subject, $message, $headers)) {
+        echo 'Email sent successfully';
+    } else {
+        echo 'Error sending email';
+    }
+}
+?>
+
+      
         
         <!-- subscribe message -->
         <div id="mesaj"></div>
