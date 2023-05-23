@@ -81,7 +81,7 @@
       
       <!-- subscribe form -->
       <div class="col-sm-12 col-md-7 subscribe-form">
-        <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform" onsubmit="return validateForm()">
+        <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform" onsubmit="return validateForm(event)">
           <div class="form-group">
             <input type="email" name="email" placeholder="Enter your email address" id="subemail" class="form-control" required />
           </div>
@@ -93,6 +93,24 @@
     </div>
   </div>
 </section>
+
+<script>
+function validateForm(event) {
+  event.preventDefault(); // Prevent form submission for now
+
+  var email = document.getElementById("subemail").value;
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    alert("katja.milena.friederichs@gmail.com");
+    return false;
+  }
+
+  // If validation passes, submit the form
+  document.getElementById("subscribeform").submit();
+}
+</script>
+
 
       <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
