@@ -91,6 +91,11 @@
       background-color: #F57C00;
     }
 
+    .subscribe-form {
+      text-align: center;
+      margin-top: 20px;
+    }
+
     .subscribe-form p {
       color: white;
     }
@@ -105,7 +110,7 @@
         </div>
 
         <div class="col-sm-12 col-md-7 subscribe-form">
-          <p>You want to try the affective shifting yourself? We are currently in the process of making affective shifting available for everyone in an app. Click the notify me button and let us know to inform you how our progress is going and when the app will be available..</p>
+          <p>Subscribe to our updates and be notified about the latest news, offers, and events.</p>
           <button id="notifyButton" class="notify-button">Notify Me</button>
         </div>
       </div>
@@ -114,9 +119,9 @@
 
   <script>
     document.getElementById("notifyButton").addEventListener("click", function() {
-      var emailAddress = "affectiveshifting@gmail.com";
+      var emailAddress = "predefined@example.com";
       var subject = "Notify Me";
-      var body = "Yes please notify me about updates on affective shifting.";
+      var body = "Please notify me about updates.";
 
       var mailtoLink = "mailto:" + emailAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       window.location.href = mailtoLink;
