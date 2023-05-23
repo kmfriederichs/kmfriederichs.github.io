@@ -76,6 +76,21 @@
 <html>
 <head>
   <title>My Website</title>
+  <style>
+    .notify-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .notify-button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
   <section id="subscribe" class="subscribe">
@@ -86,8 +101,8 @@
         </div>
 
         <div class="col-sm-12 col-md-7 subscribe-form">
-          <p>Subscribe to our updates and be notified about the latest news, offers, and events.</p>
-          <button id="notifyButton">Notify Me</button>
+          <p>You want to try the tool yourself? We are currently in the process of making affective shifting available for everyone in an app. Click the notify me button and let us know to inform you how our progress is going and when the app will be available.</p>
+          <button id="notifyButton" class="notify-button">Notify Me</button>
         </div>
       </div>
     </div>
@@ -95,9 +110,9 @@
 
   <script>
     document.getElementById("notifyButton").addEventListener("click", function() {
-      var emailAddress = "affectiveshifting@gmail.com";
+      var emailAddress = "affectiveshifting@example.com";
       var subject = "Notify Me";
-      var body = "Please notify me about updates.";
+      var body = "Yes please notify me about updates on affective shifting.";
 
       var mailtoLink = "mailto:" + emailAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       window.location.href = mailtoLink;
