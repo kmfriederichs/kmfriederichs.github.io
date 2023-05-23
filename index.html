@@ -78,7 +78,7 @@
       <div class="col-sm-12 col-md-5 subscribe-title">
         <h2>Subscribe now.</h2>
       </div>
-      
+
       <!-- subscribe form -->
       <div class="col-sm-12 col-md-7 subscribe-form">
         <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform" onsubmit="return validateForm(event)">
@@ -102,41 +102,33 @@ function validateForm(event) {
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailRegex.test(email)) {
-    alert("katja.milena.friederichs@gmail.com");
+    alert("Please enter a valid email address.");
     return false;
   }
 
   // If validation passes, submit the form
-  document.getElementById("subscribeform").submit();
+  var xhr = new XMLHttpRequest();
+  var url = "php/subscribe.php";
+  var params = "email=" + encodeURIComponent(email);
+
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        alert("You will be notified when an update occurs.");
+        document.getElementById("subscribeform").reset();
+      } else {
+        alert("An error occurred. Please try again later.");
+      }
+    }
+  };
+
+  xhr.send(params);
+  return false;
 }
 </script>
-
-
-      <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $to = 'katja.milena.friederichs@gmail.com'; // Replace with the desired recipient email address
-    $subject = 'New subscription';
-    $email = $_POST['email'];
-
-    // Validate email address
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo 'Invalid email address';
-        exit;
-    }
-
-    // Compose the email message
-    $message = "A new user subscribed with the following email address:\n\n";
-    $message .= "Email: $email\n";
-
-    // Send the email
-    $headers = 'From: katja.milena.friederichs@gmail.com'; // Replace with your own email address or leave it as is
-    if (mail($to, $subject, $message, $headers)) {
-        echo 'Email sent successfully';
-    } else {
-        echo 'Error sending email';
-    }
-}
-?>
 
       
         
