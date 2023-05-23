@@ -1,5 +1,8 @@
 <?php
 phpinfo();
+?>
+
+<?php
 if (!$_POST) {
     exit;
 }
