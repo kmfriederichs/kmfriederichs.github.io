@@ -75,27 +75,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Notify Me Button</title>
+  <title>My Website</title>
 </head>
 <body>
-  <button id="notifyButton">Notify Me</button>
+  <h1>Welcome to My Website</h1>
+
+  <section id="subscribe">
+    <h2>Subscribe</h2>
+    <p>Subscribe to our updates and be notified about the latest news, offers, and events.</p>
+    <button id="notifyButton">Notify Me</button>
+  </section>
 
   <script>
     document.getElementById("notifyButton").addEventListener("click", function() {
-      // Predefined email address
       var emailAddress = "affectiveshifting@gmail.com";
-      
-      // Subject and body of the email
       var subject = "Notify Me";
       var body = "Please notify me about updates.";
 
-      // Open user's email client
       var mailtoLink = "mailto:" + emailAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       window.location.href = mailtoLink;
     });
   </script>
 </body>
 </html>
+
       
         
         <!-- subscribe message -->
