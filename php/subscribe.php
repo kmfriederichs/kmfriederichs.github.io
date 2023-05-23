@@ -29,15 +29,18 @@ $address = "katja.milena.friederichs@gmail.com"; // Enter the email address that
 $e_subject = 'New email subscriber ' . $email . '.'; // Email subject
 
 $e_body = "New email subscriber: $email";
-$msg = wordwrap($e_body);
+$msg = wordwrap($e_body, 70, PHP_EOL, true); // Wordwrap the message to prevent long lines
 
 $headers = "From: $email" . PHP_EOL;
 $headers .= "Reply-To: $email" . PHP_EOL;
 $headers .= "MIME-Version: 1.0" . PHP_EOL;
 $headers .= "Content-type: text/plain; charset=utf-8" . PHP_EOL;
 $headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
+$headers .= "X-Mailer: PHP/" . phpversion(); // Add X-Mailer header to indicate the use of PHP mail function
 
-if (mail($address, $e_subject, $msg, $headers)) {
+$success = mail($address, $e_subject, $msg, $headers);
+
+if ($success) {
     // Email has been sent successfully
     echo "<fieldset>";
     echo "<div id='success_page'>";
@@ -46,6 +49,8 @@ if (mail($address, $e_subject, $msg, $headers)) {
     echo "</div>";
     echo "</fieldset>";
 } else {
-    echo 'ERROR!';
+    // An error occurred while sending the email
+    echo '<div class="error_message">An error occurred. Please try again later.</div>';
 }
 ?>
+
