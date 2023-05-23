@@ -1,4 +1,8 @@
 <?php
+require 'vendor/autoload.php'; // Require the Composer autoloader
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if (!$_POST) {
     exit;
 }
@@ -28,19 +32,27 @@ if (trim($email) == '') {
 $address = "katja.milena.friederichs@gmail.com"; // Enter the email address that you want to receive the emails
 $e_subject = 'New email subscriber ' . $email . '.'; // Email subject
 
-$e_body = "New email subscriber: $email";
-$msg = wordwrap($e_body, 70, PHP_EOL, true); // Wordwrap the message to prevent long lines
+$mail = new PHPMailer(true);
 
-$headers = "From: $email" . PHP_EOL;
-$headers .= "Reply-To: $email" . PHP_EOL;
-$headers .= "MIME-Version: 1.0" . PHP_EOL;
-$headers .= "Content-type: text/plain; charset=utf-8" . PHP_EOL;
-$headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
-$headers .= "X-Mailer: PHP/" . phpversion(); // Add X-Mailer header to indicate the use of PHP mail function
+try {
+    // Gmail SMTP configuration
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'affectiveshiftings@gmail.com'; // Replace with your Gmail username
+    $mail->Password = 'your-gmail-password'; // Replace with your Gmail password
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
 
-$success = mail($address, $e_subject, $msg, $headers);
+    // Set email headers
+    $mail->setFrom($email);
+    $mail->addAddress($address);
+    $mail->Subject = $e_subject;
+    $mail->Body = "New email subscriber: $email";
 
-if ($success) {
+    // Send the email
+    $mail->send();
+
     // Email has been sent successfully
     echo "<fieldset>";
     echo "<div id='success_page'>";
@@ -48,9 +60,8 @@ if ($success) {
     echo "<p class='center'>Thank you! We will contact you once we launch the website!</p>";
     echo "</div>";
     echo "</fieldset>";
-} else {
+} catch (Exception $e) {
     // An error occurred while sending the email
     echo '<div class="error_message">An error occurred. Please try again later.</div>';
 }
 ?>
-
