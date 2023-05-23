@@ -72,63 +72,30 @@
 </section>
 <!--intro section --> 
 <!--subscribe section -->
-<section id="subscribes" class="subscribe">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-5 subscribe-title">
-        <h2>Subscribe now.</h2>
-      </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notify Me Button</title>
+</head>
+<body>
+  <button id="notifyButton">Notify Me</button>
 
-      <!-- subscribe form -->
-      <div class="col-sm-12 col-md-7 subscribe-form">
-        <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform" onsubmit="return validateForm(event)">
-          <div class="form-group">
-            <input type="email" name="email" placeholder="Enter your email address" id="subemail" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <button type="submit" name="send" class="btn btn-primary">Notify me</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+  <script>
+    document.getElementById("notifyButton").addEventListener("click", function() {
+      // Predefined email address
+      var emailAddress = "predefined@example.com";
+      
+      // Subject and body of the email
+      var subject = "Notify Me";
+      var body = "Please notify me about updates.";
 
-<script>
-function validateForm(event) {
-  event.preventDefault(); // Prevent form submission for now
-
-  var email = document.getElementById("subemail").value;
-  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!emailRegex.test(email)) {
-    alert("Please enter a valid email address.");
-    return false;
-  }
-
-  // If validation passes, submit the form
-  var xhr = new XMLHttpRequest();
-  var url = "php/subscribe.php";
-  var params = "email=" + encodeURIComponent(email);
-
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        alert("You will be notified when an update occurs.");
-        document.getElementById("subscribeform").reset();
-      } else {
-        alert("An error occurred. Please try again later.");
-      }
-    }
-  };
-
-  xhr.send(params);
-  return false;
-}
-</script>
+      // Open user's email client
+      var mailtoLink = "mailto:" + emailAddress + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
 
       
         
