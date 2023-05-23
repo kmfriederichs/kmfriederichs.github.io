@@ -82,25 +82,17 @@
       <!-- subscribe form -->
       <div class="col-sm-12 col-md-7 subscribe-form">
         <form method="post" action="php/subscribe.php" name="subscribeform" id="subscribeform" onsubmit="return validateForm()">
-          <input type="email" name="email" placeholder="Enter your email address to get notified" id="subemail" required />
-          <input type="submit" name="send" value="Notify me" id="subsubmit" class="btn2" />
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Enter your email address" id="subemail" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <button type="submit" name="send" class="btn btn-primary">Notify me</button>
+          </div>
         </form>
       </div>
-      
-      <script>
-      function validateForm() {
-        var email = document.getElementById("subemail").value;
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      
-        if (!emailRegex.test(email)) {
-          alert("Please enter a valid email address.");
-          return false;
-        }
-      
-        return true;
-      }
-      </script>
-      
+    </div>
+  </div>
+</section>
 
       <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
